@@ -47,7 +47,6 @@ public class BranchFragment extends Fragment {
         mBranchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mAreaCode = getArguments().getString("areaCode");
-
         return view;
     }
 
@@ -76,18 +75,13 @@ public class BranchFragment extends Fragment {
             Log.i("ksca_log",branch.toString());
         }
 
-        if (mBranchAdapter == null){
-            mBranchAdapter= new BranchAdapter(branchList);
-            mBranchRecyclerView.setAdapter(mBranchAdapter);
-        } else {
-            Log.d("ksca_log","@@Position: "+position);
-
-            mBranchAdapter.notifyItemChanged(position);
-            //mAdapter.notifyDataSetChanged();
-        }
+        mBranchAdapter= new BranchAdapter(branchList);
+        mBranchRecyclerView.setAdapter(mBranchAdapter);
+        Log.i("ksca_log","Set Adapter");
     }
 
     private class BranchHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         private TextView mBranchFullCodeTextView;
         private TextView mAreaNameTextView;
         private TextView mBranchCodeTextView;
@@ -105,9 +99,11 @@ public class BranchFragment extends Fragment {
         }
 
         public void bindBranch(Branch branch){
+            String areaName = getArguments().getString("areaName");
+
             mBranch = branch;
-            mBranchFullCodeTextView.setText(branch.getAreaCode()+"-"+branch.getBranchCode());
-            mAreaNameTextView.setText("");
+            mBranchFullCodeTextView.setText(branch.getAreaCode());
+            mAreaNameTextView.setText(areaName);
             mBranchCodeTextView.setText(branch.getBranchCode());
             mBranchNameTextView.setText(branch.getBranch());
         }
@@ -121,29 +117,60 @@ public class BranchFragment extends Fragment {
         }
     }
 
-    private class BranchAdapter extends RecyclerView.Adapter<BranchHolder>{
+    private class BranchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         private List<Branch> mBranchList;
+        private final int TYPE_HEADER = 0;
+        private final int TYPE_ITEM = 1;
 
         public BranchAdapter(List<Branch> mBranchList) {
             this.mBranchList = mBranchList;
         }
 
         @Override
-        public BranchHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            RecyclerView.ViewHolder holder;
+            View view;
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_branch, parent, false);
-            return new BranchHolder(view);
+
+            if (viewType == TYPE_HEADER) {
+                view = layoutInflater.inflate(R.layout.list_item_branch_header, parent, false);
+                holder = new HeaderViewHolder(view);
+            } else {
+                view = layoutInflater.inflate(R.layout.list_item_branch, parent, false);
+                holder = new BranchHolder(view);
+            }
+
+            return holder;
         }
 
         @Override
-        public void onBindViewHolder(BranchHolder holder, int position) {
-            Branch branch = mBranchList.get(position);
-            holder.bindBranch(branch);
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof HeaderViewHolder){
+                HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+            } else {
+                BranchHolder branchHolder = (BranchHolder) holder;
+                Branch branch = mBranchList.get(position-1);
+                branchHolder.bindBranch(branch);
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mBranchList.size();
+            return mBranchList.size()+1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (position == 0)
+                return TYPE_HEADER;
+            else
+                return TYPE_ITEM;
+        }
+    }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+        HeaderViewHolder(View headerView) {
+            super(headerView);
         }
     }
 

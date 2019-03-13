@@ -53,11 +53,12 @@ public class MenuActivity extends AppCompatActivity
         String areaName = intent.getStringExtra("areaName");
 
         mNavTitleTextView = nav_header_view.findViewById(R.id.nav_title);
-        mNavTitleTextView.setText("사단법인 대한노인회("+areaName+")");
+        mNavTitleTextView.setText("사단법인 대한노인회 ("+areaName+")");
 
         /*  */
         Bundle bundle = new Bundle();
         bundle.putString("areaCode",areaCode);
+        bundle.putString("areaName",areaName);
 
         branchFragment = new BranchFragment();
         agencyFragment = new AgencyFragment();
@@ -68,6 +69,7 @@ public class MenuActivity extends AppCompatActivity
         /*  */
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.container, branchFragment).commit();
+        getSupportActionBar().setTitle("분회 관리");
     }
 
     @Override

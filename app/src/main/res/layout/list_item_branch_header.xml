@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="10dp"
     android:weightSum="1"
     >
 
@@ -14,6 +15,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:text="지회 코드"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -21,7 +24,9 @@
         android:layout_weight="@dimen/branch_area_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="지회"
         android:padding="4dp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -30,6 +35,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:text="코드"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -38,6 +45,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="4dp"
+        android:text="분회"
+        android:textStyle="bold"
         />
 
 </LinearLayout>

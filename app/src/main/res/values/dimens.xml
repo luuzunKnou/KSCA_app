@@ -4,4 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Branch List -->
+    <dimen name="branch_full_code">0.2</dimen>
+    <dimen name="branch_area_name">0.4</dimen>
+    <dimen name="branch_code">0.1</dimen>
+    <dimen name="branch_name">0.3</dimen>
 </resources>
