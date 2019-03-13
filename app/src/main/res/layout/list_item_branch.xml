@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!--코드 / 연합회 /연합회 코드 / 지회 / 지회 코드 / 분회 / 분회 코드-->
+
+    <TextView
+        android:id="@+id/list_item_branch_full_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="03-01-99"
+        />
+
+    <TextView
+        android:id="@+id/list_item_area_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 중구 지회"
+        android:padding="4dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_branch_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="99"
+        />
+
+    <TextView
+        android:id="@+id/list_item_branch_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="없음"
+        />
+
+</LinearLayout>
