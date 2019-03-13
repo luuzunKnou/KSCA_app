@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.luuzun.ksca.R;
 import com.luuzun.ksca.domain.Branch;
-import com.luuzun.ksca.util.HttpClient;
+import com.luuzun.ksca.util.RequestServerUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +31,7 @@ public class BranchFragment extends Fragment {
     private RecyclerView mBranchRecyclerView;
     private BranchAdapter mBranchAdapter;
     private int position;
+    private String mAreaCode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +45,8 @@ public class BranchFragment extends Fragment {
 
         mBranchRecyclerView = (RecyclerView) view.findViewById(R.id.branchFragment);
         mBranchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // 리사이클 뷰 참조
-        // 리사이클 뷰에 리니어 레이아웃 적용
+
+        mAreaCode = getArguments().getString("areaCode");
 
         return view;
     }
@@ -59,10 +60,9 @@ public class BranchFragment extends Fragment {
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
         NetworkTask networkTask2 = new NetworkTask();
         List<Branch> branchList = new ArrayList<>();
-        String areaCode = "03-01";
 
         Map paramsMap = new HashMap();
-        paramsMap.put("areaCode", areaCode);
+        paramsMap.put("areaCode", mAreaCode);
 
         try {
             branchList = networkTask2.execute(paramsMap).get();
@@ -156,21 +156,8 @@ public class BranchFragment extends Fragment {
 
         @Override
         protected List<Branch> doInBackground(Map... params) {
-            // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.2:8080/android/branch");
-
-            // 파라미터 전송
-            http.addAllParameters(params[0]);
-
-            // HTTP 요청 전송
-            HttpClient post = http.create();
-            post.request();
-
-            // 응답 상태코드 가져오기
-            int statusCode = post.getHttpStatusCode();
-
-            // 응답 본문 가져오기
-            String body = post.getBody();
+            String body = RequestServerUtil.getInstance().request("branch", params);
+            Log.i("ksca_log", "Body : " + body);
 
             Gson gson = new Gson();
 

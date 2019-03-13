@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.luuzun.ksca.domain.Permission;
 import com.luuzun.ksca.fragment.AgencyFragment;
@@ -22,6 +24,9 @@ public class MenuActivity extends AppCompatActivity
     BranchFragment branchFragment;
     AgencyFragment agencyFragment;
     FragmentManager fragmentManager;
+
+    TextView mNavTitleTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,8 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View nav_header_view = navigationView.getHeaderView(0);
+
         /*  */
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -45,10 +52,20 @@ public class MenuActivity extends AppCompatActivity
         String areaCode = intent.getStringExtra("areaCode");
         String areaName = intent.getStringExtra("areaName");
 
+        mNavTitleTextView = nav_header_view.findViewById(R.id.nav_title);
+        mNavTitleTextView.setText("사단법인 대한노인회("+areaName+")");
+
         /*  */
+        Bundle bundle = new Bundle();
+        bundle.putString("areaCode",areaCode);
+
         branchFragment = new BranchFragment();
         agencyFragment = new AgencyFragment();
 
+        branchFragment.setArguments(bundle);
+        agencyFragment.setArguments(bundle);
+
+        /*  */
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.container, branchFragment).commit();
     }
