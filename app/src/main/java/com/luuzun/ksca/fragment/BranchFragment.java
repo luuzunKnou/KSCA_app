@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +30,6 @@ public class BranchFragment extends Fragment {
     private RecyclerView mBranchRecyclerView;
     private BranchAdapter mBranchAdapter;
     private int position;
-    private String mAreaCode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class BranchFragment extends Fragment {
         mBranchRecyclerView = (RecyclerView) view.findViewById(R.id.branchFragment);
         mBranchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mAreaCode = getArguments().getString("areaCode");
         return view;
     }
 
@@ -59,6 +56,7 @@ public class BranchFragment extends Fragment {
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
         NetworkTask networkTask2 = new NetworkTask();
         List<Branch> branchList = new ArrayList<>();
+        String mAreaCode = getArguments().getString("areaCode");
 
         Map paramsMap = new HashMap();
         paramsMap.put("areaCode", mAreaCode);
@@ -110,7 +108,7 @@ public class BranchFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), mBranch.getBranch() + "선택됨", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), mBranch.getBranch() + "선택됨", Toast.LENGTH_SHORT).show();
             //Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getmId());
             //position = getAdapterPosition();
             //startActivity(intent);

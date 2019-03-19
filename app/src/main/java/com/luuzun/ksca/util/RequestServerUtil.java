@@ -17,6 +17,8 @@ public class RequestServerUtil {
         // HTTP 요청 준비 작업
         HttpClient.Builder http = new HttpClient.Builder("POST", SERVER+url);
 
+        Log.i("ksca_log", "Call : "+SERVER+url);
+
         // 파라미터 전송
         http.addAllParameters(params[0]);
 

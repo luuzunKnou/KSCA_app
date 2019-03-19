@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    >
+
+    <!--코드 / 연합회 /연합회 코드 / 지회 / 지회 코드 / 분회 / 분회 코드-->
+
+    <TextView
+        android:id="@+id/list_item_agency_name"
+        android:layout_weight="@dimen/agency_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        />
+
+    <TextView
+        android:id="@+id/list_item_agency_manager"
+        android:layout_weight="@dimen/agency_manager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        />
+
+    <TextView
+        android:id="@+id/list_item_agency_tel"
+        android:layout_weight="@dimen/agency_tel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        />
+
+</LinearLayout>
