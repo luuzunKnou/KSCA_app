@@ -17,13 +17,18 @@ import android.widget.TextView;
 import com.luuzun.ksca.domain.Permission;
 import com.luuzun.ksca.fragment.AgencyFragment;
 import com.luuzun.ksca.fragment.BranchFragment;
+import com.luuzun.ksca.fragment.ProgramFragment;
+import com.luuzun.ksca.fragment.SccFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    FragmentManager fragmentManager;
+
     BranchFragment branchFragment;
     AgencyFragment agencyFragment;
-    FragmentManager fragmentManager;
+    ProgramFragment programFragment;
+    SccFragment sccFragment;
 
     TextView mNavTitleTextView;
 
@@ -62,9 +67,13 @@ public class MenuActivity extends AppCompatActivity
 
         branchFragment = new BranchFragment();
         agencyFragment = new AgencyFragment();
+        programFragment = new ProgramFragment();
+        sccFragment = new SccFragment();
 
         branchFragment.setArguments(bundle);
         agencyFragment.setArguments(bundle);
+        programFragment.setArguments(bundle);
+        sccFragment.setArguments(bundle);
 
         /*  */
         fragmentManager = getSupportFragmentManager();
@@ -113,15 +122,17 @@ public class MenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_branch) {
             fragmentManager.beginTransaction().replace(R.id.container, branchFragment).commit();
+            getSupportActionBar().setTitle("분회");
         } else if (id == R.id.nav_scc) {
-
+            fragmentManager.beginTransaction().replace(R.id.container, sccFragment).commit();
+            getSupportActionBar().setTitle("경로당");
         } else if (id == R.id.nav_agency) {
             fragmentManager.beginTransaction().replace(R.id.container, agencyFragment).commit();
+            getSupportActionBar().setTitle("기관");
         } else if (id == R.id.nav_program) {
-
+            fragmentManager.beginTransaction().replace(R.id.container, programFragment).commit();
+            getSupportActionBar().setTitle("프로그램");
         } else if (id == R.id.nav_schedule) {
-
-        } else if (id == R.id.nav_category) {
 
         }
 

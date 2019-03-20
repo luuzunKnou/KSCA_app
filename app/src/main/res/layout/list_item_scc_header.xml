@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
+    android:weightSum="1"
+    >
+
+    <!-- 프로그램 이름 / 기관 / 담당자 / 연락처-->
+
+    <TextView
+        android:id="@+id/list_item_scc_code"
+        android:layout_weight="@dimen/scc_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="경로당 코드"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_scc_dong"
+        android:layout_weight="@dimen/scc_dong"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="소재"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_scc_name"
+        android:layout_weight="@dimen/scc_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="경로당 이름"
+        android:padding="4dp"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>

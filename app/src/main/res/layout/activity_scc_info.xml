@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SccInfoActivity">
+
+    <TextView
+        android:id="@+id/scc_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="코드"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="동"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_dong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="경로당 이름"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="소재지"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onAddressClicked"/>
+            <TextView
+                android:id="@+id/scc_info_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onAddressClicked"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="등록일자"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_reg_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="규모(대지)"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="규모(건물)"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_building"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="회원 수"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="회원 수(남)"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="회원 수(여)"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_female"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="소유"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_own"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="전화번호"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onTelClicked"/>
+            <TextView
+                android:id="@+id/scc_info_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onTelClicked"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="회장 명"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"/>
+            <TextView
+                android:id="@+id/scc_info_president"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="@dimen/scc_info_header"
+                android:layout_height="wrap_content"
+                android:text="회장 연락처"
+                android:textStyle="bold"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onPhoneClicked"/>
+            <TextView
+                android:id="@+id/scc_info_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/scc_info_padding"
+                android:onClick="onPhoneClicked"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

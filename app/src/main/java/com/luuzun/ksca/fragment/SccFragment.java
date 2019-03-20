@@ -1,5 +1,6 @@
 package com.luuzun.ksca.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.luuzun.ksca.R;
-import com.luuzun.ksca.domain.Branch;
+import com.luuzun.ksca.SccInfoActivity;
+import com.luuzun.ksca.domain.SCC;
 import com.luuzun.ksca.util.RequestServerUtil;
 
 import java.util.ArrayList;
@@ -25,10 +27,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class BranchFragment extends Fragment {
+public class SccFragment extends Fragment {
 
-    private RecyclerView mBranchRecyclerView;
-    private BranchAdapter mBranchAdapter;
+    private RecyclerView mSccRecyclerView;
+    private SccFragment.SccAdapter mSccAdapter;
     private int position;
 
     @Override
@@ -39,10 +41,10 @@ public class BranchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_branch, container, false);
+        View view = inflater.inflate(R.layout.fragment_scc, container, false);
 
-        mBranchRecyclerView = (RecyclerView) view.findViewById(R.id.branchFragment);
-        mBranchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mSccRecyclerView = (RecyclerView) view.findViewById(R.id.sccFragment);
+        mSccRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
@@ -54,70 +56,73 @@ public class BranchFragment extends Fragment {
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
-        NetworkTask networkTask2 = new NetworkTask();
-        List<Branch> branchList = new ArrayList<>();
+        SccFragment.NetworkTask networkTask2 = new SccFragment.NetworkTask();
+        List<SCC> sccList = new ArrayList<>();
         String mAreaCode = getArguments().getString("areaCode");
 
         Map paramsMap = new HashMap();
         paramsMap.put("areaCode", mAreaCode);
 
         try {
-            branchList = networkTask2.execute(paramsMap).get();
+            sccList = networkTask2.execute(paramsMap).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        for (Branch branch: branchList) {
-            Log.i("ksca_log",branch.toString());
+        for (SCC scc: sccList) {
+            Log.i("ksca_log",scc.toString());
         }
 
-        mBranchAdapter= new BranchAdapter(branchList);
-        mBranchRecyclerView.setAdapter(mBranchAdapter);
+        mSccAdapter= new SccFragment.SccAdapter(sccList);
+        mSccRecyclerView.setAdapter(mSccAdapter);
         Log.i("ksca_log","Set Adapter");
     }
 
-    private class BranchHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class SccHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView mBranchFullCodeTextView;
-        private TextView mAreaNameTextView;
-        private TextView mBranchCodeTextView;
-        private TextView mBranchNameTextView;
+        private TextView mSccCodeTextView;
+        private TextView mSccDongTextView;
+        private TextView mSccNameTextView;
 
-        private Branch mBranch;
+        private SCC mScc;
 
-        public BranchHolder(View itemView) {
+        public SccHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            mBranchFullCodeTextView = (TextView) itemView.findViewById(R.id.list_item_branch_full_code);
-            mAreaNameTextView = (TextView) itemView.findViewById(R.id.list_item_area_name);
-            mBranchCodeTextView = (TextView) itemView.findViewById(R.id.list_item_branch_code);
-            mBranchNameTextView = (TextView) itemView.findViewById(R.id.list_item_branch_name);
+
+            mSccCodeTextView = (TextView) itemView.findViewById(R.id.list_item_scc_code);
+            mSccDongTextView = (TextView) itemView.findViewById(R.id.list_item_scc_dong);
+            mSccNameTextView = (TextView) itemView.findViewById(R.id.list_item_scc_name);
         }
 
-        public void bindBranch(Branch branch){
+        public void bindScc(SCC scc){
             String areaName = getArguments().getString("areaName");
 
-            mBranch = branch;
-            mBranchFullCodeTextView.setText(branch.getAreaCode());
-            mAreaNameTextView.setText(areaName);
-            mBranchCodeTextView.setText(branch.getBranchCode());
-            mBranchNameTextView.setText(branch.getBranch());
+            mScc = scc;
+            mSccCodeTextView.setText(scc.getAreaCode()+"-"+scc.getBranchCode()+"-"+scc.getSccCode());
+            mSccDongTextView.setText(scc.getDong());
+            mSccNameTextView.setText(scc.getName());
         }
 
         @Override
         public void onClick(View v) {
+            position = getAdapterPosition();
+            Intent intent = new Intent(getActivity(), SccInfoActivity.class);
+            intent.putExtra("scc", mScc);
+
+            startActivity(intent);
         }
     }
 
-    private class BranchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-        private List<Branch> mBranchList;
+    private class SccAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+        private List<SCC> mSccList;
         private final int TYPE_HEADER = 0;
         private final int TYPE_ITEM = 1;
 
-        public BranchAdapter(List<Branch> mBranchList) {
-            this.mBranchList = mBranchList;
+        public SccAdapter(List<SCC> mSccList) {
+            this.mSccList = mSccList;
         }
 
         @Override
@@ -127,11 +132,11 @@ public class BranchFragment extends Fragment {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
             if (viewType == TYPE_HEADER) {
-                view = layoutInflater.inflate(R.layout.list_item_branch_header, parent, false);
-                holder = new HeaderViewHolder(view);
+                view = layoutInflater.inflate(R.layout.list_item_scc_header, parent, false);
+                holder = new SccFragment.HeaderViewHolder(view);
             } else {
-                view = layoutInflater.inflate(R.layout.list_item_branch, parent, false);
-                holder = new BranchHolder(view);
+                view = layoutInflater.inflate(R.layout.list_item_scc, parent, false);
+                holder = new SccFragment.SccHolder(view);
             }
 
             return holder;
@@ -139,18 +144,18 @@ public class BranchFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            if(holder instanceof HeaderViewHolder){
-                HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+            if(holder instanceof SccFragment.HeaderViewHolder){
+                SccFragment.HeaderViewHolder headerViewHolder = (SccFragment.HeaderViewHolder) holder;
             } else {
-                BranchHolder branchHolder = (BranchHolder) holder;
-                Branch branch = mBranchList.get(position-1);
-                branchHolder.bindBranch(branch);
+                SccFragment.SccHolder sccHolder = (SccFragment.SccHolder) holder;
+                SCC scc = mSccList.get(position-1);
+                sccHolder.bindScc(scc);
             }
         }
 
         @Override
         public int getItemCount() {
-            return mBranchList.size()+1;
+            return mSccList.size()+1;
         }
 
         @Override
@@ -168,7 +173,7 @@ public class BranchFragment extends Fragment {
         }
     }
 
-    public class NetworkTask extends AsyncTask<Map, Integer, List<Branch>> {
+    public class NetworkTask extends AsyncTask<Map, Integer, List<SCC>> {
         /* doInBackground가 실행되기 이전에 동작 */
         @Override
         protected void onPreExecute() {
@@ -176,21 +181,21 @@ public class BranchFragment extends Fragment {
         }
 
         @Override
-        protected List<Branch> doInBackground(Map... params) {
-            String body = RequestServerUtil.getInstance().request("branch", params);
+        protected List<SCC> doInBackground(Map... params) {
+            String body = RequestServerUtil.getInstance().request("scc", params);
             Log.i("ksca_log", "Body : " + body);
 
             Gson gson = new Gson();
 
-            List<Branch> branchList
-                    = gson.fromJson(body, new TypeToken<List<Branch>>(){}.getType());
+            List<SCC> sccList
+                    = gson.fromJson(body, new TypeToken<List<SCC>>(){}.getType());
 
-            return branchList;
+            return sccList;
         }
 
         /* doInBackground가 종료되면 동작. doInBackground가 리턴한 값을 받음. */
         @Override
-        protected void onPostExecute(List<Branch> branchList) {
+        protected void onPostExecute(List<SCC> SccList) {
         }
     }
 }

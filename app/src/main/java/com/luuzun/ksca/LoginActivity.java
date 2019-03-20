@@ -37,8 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.et_password);
 
         Map paramsMap = new HashMap();
-        paramsMap.put("id", mEtId.getText());
-        paramsMap.put("password", mEtPassword.getText());
+        //paramsMap.put("id", mEtId.getText());
+        //paramsMap.put("password", mEtPassword.getText());
+        paramsMap.put("id","mcmoto");
+        paramsMap.put("password","mcmoto.ksca");
 
         try {
             Map<String,Object> result = networkTask.execute(paramsMap).get();

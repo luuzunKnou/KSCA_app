@@ -13,10 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".GoogleMapActivity"></activity>
+        <activity android:name=".SccInfoActivity" />
+
+        <activity android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"/>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCwthHjGhzqe94hZ7aytoJ-AMDA4xYkjvY" />
     </application>
 
 </manifest>

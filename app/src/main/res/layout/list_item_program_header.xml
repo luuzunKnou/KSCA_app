@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
+    android:weightSum="1"
+    >
+
+    <!-- 프로그램 이름 / 기관 / 담당자 / 연락처-->
+
+    <TextView
+        android:id="@+id/list_item_program_name"
+        android:layout_weight="@dimen/program_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="프로그램 이름"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_program_agency"
+        android:layout_weight="@dimen/program_agency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="기관"
+        android:padding="4dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_program_manager"
+        android:layout_weight="@dimen/program_manager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="담장자"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/list_item_program_tel"
+        android:layout_weight="@dimen/program_tel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="연락처"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>
