@@ -74,6 +74,7 @@ public class SccInfoActivity extends AppCompatActivity {
     public void onAddressClicked(View view) {
         Intent intent = new Intent(this, GoogleMapActivity.class);
         intent.putExtra("address", mScc.getAddress().split("\\(")[0]);
+        intent.putExtra("name", mScc.getName());
         startActivity(intent);
     }
 

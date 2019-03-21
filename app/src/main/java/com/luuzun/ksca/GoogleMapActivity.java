@@ -35,7 +35,9 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         Intent intent = getIntent();
         String address = intent.getStringExtra("address");
-        Log.i("ksca_log", "On Map Ready-"+address);
+        String name = intent.getStringExtra("name");
+
+        Log.i("ksca_log", "On Map Ready-"+address+"("+name+")");
 
         mMap = googleMap;
         geocoder = new Geocoder(this);
@@ -61,7 +63,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                 LatLng point = new LatLng(latitude, longitude);
 
                 MarkerOptions mOptions = new MarkerOptions(); //마커 생성
-                mOptions.title("search result");
+                mOptions.title(name);
                 mOptions.snippet(address);
                 mOptions.position(point);
                 // 마커 추가
