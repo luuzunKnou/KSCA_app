@@ -54,7 +54,7 @@ public class BranchFragment extends Fragment {
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
-        NetworkTask networkTask2 = new NetworkTask();
+        NetworkTask networkTask = new NetworkTask();
         List<Branch> branchList = new ArrayList<>();
         String mAreaCode = getArguments().getString("areaCode");
 
@@ -62,7 +62,7 @@ public class BranchFragment extends Fragment {
         paramsMap.put("areaCode", mAreaCode);
 
         try {
-            branchList = networkTask2.execute(paramsMap).get();
+            branchList = networkTask.execute(paramsMap).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

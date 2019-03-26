@@ -56,7 +56,7 @@ public class AgencyFragment extends Fragment {
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
-        AgencyFragment.NetworkTask networkTask2 = new AgencyFragment.NetworkTask();
+        AgencyFragment.NetworkTask networkTask = new AgencyFragment.NetworkTask();
         List<Agency> agencyList = new ArrayList<>();
         String mAreaCode = getArguments().getString("areaCode");
 
@@ -64,7 +64,7 @@ public class AgencyFragment extends Fragment {
         paramsMap.put("areaCode", mAreaCode);
 
         try {
-            agencyList = networkTask2.execute(paramsMap).get();
+            agencyList = networkTask.execute(paramsMap).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -97,8 +97,6 @@ public class AgencyFragment extends Fragment {
         }
 
         public void bindAgency(Agency agency){
-            String areaName = getArguments().getString("areaName");
-
             mAgency = agency;
             mAgencyNameTextView.setText(agency.getName());
             mAgencyManagerTextView.setText(agency.getManager());

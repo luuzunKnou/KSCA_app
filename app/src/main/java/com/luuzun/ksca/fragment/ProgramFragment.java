@@ -56,7 +56,7 @@ public class ProgramFragment extends Fragment {
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
-        ProgramFragment.NetworkTask networkTask2 = new ProgramFragment.NetworkTask();
+        ProgramFragment.NetworkTask networkTask = new ProgramFragment.NetworkTask();
         List<ProgramJoinForList> programList = new ArrayList<>();
         String mAreaCode = getArguments().getString("areaCode");
 
@@ -64,7 +64,7 @@ public class ProgramFragment extends Fragment {
         paramsMap.put("areaCode", mAreaCode);
 
         try {
-            programList = networkTask2.execute(paramsMap).get();
+            programList = networkTask.execute(paramsMap).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -100,8 +100,6 @@ public class ProgramFragment extends Fragment {
         }
 
         public void bindProgram(ProgramJoinForList program){
-            String areaName = getArguments().getString("areaName");
-
             mProgram = program;
             mProgramNameTextView.setText(program.getProgram().getName());
             mProgramAgencyTextView.setText(program.getAgency().getName());

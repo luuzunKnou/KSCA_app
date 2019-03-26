@@ -59,7 +59,7 @@ public class SccInfoActivity extends AppCompatActivity {
         mTfDong.setText(mScc.getDong());
         mTfName.setText(mScc.getName());
         mTfAddress.setText(mScc.getAddress());
-        mTfRegDate.setText(mScc.getRegDate());
+        mTfRegDate.setText(mScc.getSimpleRegDate());
         mTfSite.setText(Float.toString(mScc.getSite()));
         mTfBuilding.setText(Float.toString(mScc.getBuilding()));
         mTfMember.setText(Integer.toString(mScc.getMember()));

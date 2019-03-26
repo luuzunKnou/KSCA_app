@@ -56,7 +56,7 @@ public class SccFragment extends Fragment {
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
-        SccFragment.NetworkTask networkTask2 = new SccFragment.NetworkTask();
+        SccFragment.NetworkTask networkTask = new SccFragment.NetworkTask();
         List<SCC> sccList = new ArrayList<>();
         String mAreaCode = getArguments().getString("areaCode");
 
@@ -64,7 +64,7 @@ public class SccFragment extends Fragment {
         paramsMap.put("areaCode", mAreaCode);
 
         try {
-            sccList = networkTask2.execute(paramsMap).get();
+            sccList = networkTask.execute(paramsMap).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -98,8 +98,6 @@ public class SccFragment extends Fragment {
         }
 
         public void bindScc(SCC scc){
-            String areaName = getArguments().getString("areaName");
-
             mScc = scc;
             mSccCodeTextView.setText(scc.getAreaCode()+"-"+scc.getBranchCode()+"-"+scc.getSccCode());
             mSccDongTextView.setText(scc.getDong());

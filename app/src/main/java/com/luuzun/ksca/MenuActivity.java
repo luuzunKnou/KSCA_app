@@ -19,6 +19,7 @@ import com.luuzun.ksca.fragment.AgencyFragment;
 import com.luuzun.ksca.fragment.BranchFragment;
 import com.luuzun.ksca.fragment.ProgramFragment;
 import com.luuzun.ksca.fragment.SccFragment;
+import com.luuzun.ksca.fragment.ScheduleFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity
     AgencyFragment agencyFragment;
     ProgramFragment programFragment;
     SccFragment sccFragment;
+    ScheduleFragment scheduleFragment;
 
     TextView mNavTitleTextView;
 
@@ -69,16 +71,18 @@ public class MenuActivity extends AppCompatActivity
         agencyFragment = new AgencyFragment();
         programFragment = new ProgramFragment();
         sccFragment = new SccFragment();
+        scheduleFragment = new ScheduleFragment();
 
         branchFragment.setArguments(bundle);
         agencyFragment.setArguments(bundle);
         programFragment.setArguments(bundle);
         sccFragment.setArguments(bundle);
+        scheduleFragment.setArguments(bundle);
 
         /*  */
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.container, branchFragment).commit();
-        getSupportActionBar().setTitle("분회 관리");
+        fragmentManager.beginTransaction().add(R.id.container, scheduleFragment).commit();
+        getSupportActionBar().setTitle("스케줄");
     }
 
     @Override
@@ -133,7 +137,8 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.container, programFragment).commit();
             getSupportActionBar().setTitle("프로그램");
         } else if (id == R.id.nav_schedule) {
-
+            fragmentManager.beginTransaction().replace(R.id.container, scheduleFragment).commit();
+            getSupportActionBar().setTitle("스케줄");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
