@@ -1,5 +1,6 @@
 package com.luuzun.ksca.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,8 +35,12 @@ public class ScheduleFragment extends Fragment {
     private RecyclerView mScheduleRecyclerView;
     private LinearLayout mCalendarCell;
     private ScheduleFragment.ScheduleAdapter mScheduleAdapter;
+
     private TextView mMonthTextView;
     private TextView mYearTextView;
+    private Button mBtnLeft;
+    private Button mBtnRight;
+
     private List<ScheduleJoinforList> scheduleList;
 
     @Override
@@ -50,14 +56,59 @@ public class ScheduleFragment extends Fragment {
         mScheduleRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),5));
         mYearTextView = view.findViewById(R.id.schdule_year);
         mMonthTextView = view.findViewById(R.id.schdule_month);
+        mBtnLeft=view.findViewById(R.id.schedule_before);
+        mBtnRight=view.findViewById(R.id.schedule_after);
+
+        mBtnLeft.setOnClickListener(new Button.OnClickListener(){ //왼쪽 버튼
+            @Override
+            public void onClick(View view) {
+                int month = Integer.parseInt(((String)mMonthTextView.getText()).substring(1));
+                int year = Integer.parseInt(mYearTextView.getText().toString());
+
+                if(month<=1){
+                    mYearTextView.setText(String.valueOf(year-1));
+                    mMonthTextView.setText(".12");
+                    Log.i("ksca_log",String.valueOf(year-1)+"-"+"12");
+                } else {
+                    mMonthTextView.setText("."+String.valueOf(month-1));
+                    Log.i("ksca_log",year+"-"+String.valueOf(month-1));
+                }
+
+                updateUI();
+            }
+        });
+
+        mBtnRight.setOnClickListener(new Button.OnClickListener(){ //오른쪽 버튼
+            @Override
+            public void onClick(View view) {
+                int month = Integer.parseInt(((String)mMonthTextView.getText()).substring(1));
+                int year = Integer.parseInt(mYearTextView.getText().toString());
+
+                if(month>=12){
+                    mYearTextView.setText(String.valueOf(year+1));
+                    mMonthTextView.setText(".1");
+                    Log.i("ksca_log",String.valueOf(year-1)+"-"+"12");
+                } else {
+                    mMonthTextView.setText("."+String.valueOf(month+1));
+                    Log.i("ksca_log",year+"-"+String.valueOf(month-1));
+                }
+
+                updateUI();
+            }
+        });
 
         return view;
     }
 
     @Override
     public void onResume() {
-        super.onResume();
+        Calendar cal = Calendar.getInstance();
+
+        mYearTextView.setText(String.valueOf(cal.get(Calendar.YEAR)));
+        mMonthTextView.setText("."+(cal.get(Calendar.MONTH)+1));
         updateUI();
+
+        super.onResume();
     }
 
     private void updateUI() {   // updateUI : List를 생성하고 어뎁터 세팅
@@ -208,10 +259,18 @@ public class ScheduleFragment extends Fragment {
     }
 
     public class NetworkTask extends AsyncTask<Map, Integer, List<ScheduleJoinforList>> {
-        /* doInBackground가 실행되기 이전에 동작 */
+        ProgressDialog asyncDialog;
+
         @Override
         protected void onPreExecute() {
+            Log.i("ksca_log", "Loading..");
             super.onPreExecute();
+
+            asyncDialog = new ProgressDialog(getActivity());
+            asyncDialog.setTitle("Loading");
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("Loading...");
+            asyncDialog.show();
         }
 
         @Override
@@ -227,9 +286,11 @@ public class ScheduleFragment extends Fragment {
             return scheduleList;
         }
 
-        /* doInBackground가 종료되면 동작. doInBackground가 리턴한 값을 받음. */
         @Override
-        protected void onPostExecute(List<ScheduleJoinforList> SccList) {
+        protected void onPostExecute(List<ScheduleJoinforList> scheduleList) {
+            Log.i("ksca_log", "Complete..");
+            super.onPostExecute(scheduleList);
+            asyncDialog.dismiss();
         }
     }
 }
