@@ -11,7 +11,7 @@ public class RequestServerUtil {
         return instance;
     }
 
-    private final String SERVER = "http://192.168.0.2:8080/android/";
+    private final String SERVER = "http://15.164.25.224/android/";
 
     public String request(String url, Map... params){
         // HTTP 요청 준비 작업

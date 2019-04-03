@@ -37,10 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.et_password);
 
         Map paramsMap = new HashMap();
-        //paramsMap.put("id", mEtId.getText());
-        //paramsMap.put("password", mEtPassword.getText());
-        paramsMap.put("id","mcmoto");
-        paramsMap.put("password","mcmoto.ksca");
+        paramsMap.put("id", mEtId.getText());
+        paramsMap.put("password", mEtPassword.getText());
 
         try {
             Map<String,Object> result = networkTask.execute(paramsMap).get();
@@ -67,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("ksca_log", areaName);
 
                 Intent intent = new Intent(this, MenuActivity.class);
-
                 intent.putExtra("id", manager.getId());
                 intent.putExtra("permission", manager.getPermission());
                 intent.putExtra("areaCode", manager.getArea());
