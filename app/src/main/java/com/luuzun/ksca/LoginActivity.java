@@ -37,15 +37,22 @@ public class LoginActivity extends AppCompatActivity {
         mEtPassword = findViewById(R.id.et_password);
 
         Map paramsMap = new HashMap();
-        paramsMap.put("id", mEtId.getText());
-        paramsMap.put("password", mEtPassword.getText());
+
+        /* 임시. mcmoto 로그인 */
+        //paramsMap.put("id", mEtId.getText());
+        //paramsMap.put("password", mEtPassword.getText());
+        paramsMap.put("id", "mcmoto");
+        paramsMap.put("password", "rmawn586!");
+        //Log.i("ksca_log", "Login Try");
 
         try {
             Map<String,Object> result = networkTask.execute(paramsMap).get();
 
             //excute의 인자는 DoInBackground의 parameter
             //get method로 DoInBackground의 return값을 가져옴
+
             if(result.containsKey("ERROR")) {
+                Log.i("ksca_log", "Login Failed");
                 String error = (String) result.get("ERROR");
                 if (error.equals("FAIL")) {
                     Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
@@ -56,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             else {
+                Log.i("ksca_log", "Login Success");
                 Manager manager = (Manager) result.get("manager");
                 String areaName = (String) result.get("areaName");
 

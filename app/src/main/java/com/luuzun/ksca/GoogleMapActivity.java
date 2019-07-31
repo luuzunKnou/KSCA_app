@@ -28,7 +28,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_google_map);
 
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(GoogleMapActivity.this);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         String name = intent.getStringExtra("name");
 
         Log.i("ksca_log", "On Map Ready-"+address+"("+name+")");
-
+        Log.i("ksca_log", getString(R.string.google_maps_api_key));
         mMap = googleMap;
         geocoder = new Geocoder(this);
 
